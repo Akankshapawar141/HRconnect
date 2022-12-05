@@ -14,6 +14,6 @@ for emp in employees:
         if key == 'SALARY':
             value = int(value)
             if value > 9000:
-                new_output = (F"'{'Name: {emp['FIRST_NAME']} {emp['LAST_NAME']}\nemail:{emp['EMAIL']}\nphone number : "
-                             F"{emp['PHONE_NUMBER']} \n'}'")
+                new_output = (F"Name: {emp['FIRST_NAME']} {emp['LAST_NAME']}\nemail:{emp['EMAIL']}\nphone number : "
+                             F"{emp['PHONE_NUMBER']} \n")
                 print(new_output)
