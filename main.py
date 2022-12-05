@@ -2,47 +2,49 @@ import csv
 
 
 class HandleCSV:
-
     filename = "employees.csv"
-    all = []
-    def _init_(self, FIRST_NAME: str, LAST_NAME: str, EMAIL:str,PHONE_NUMBER,EMPLOYEE_ID):
 
-        self.EMPLOYEE_ID = EMPLOYEE_ID
-        self.FIRST_NAME = FIRST_NAME
-        self.LAST_NAME = LAST_NAME
-        self.EMAIL = EMAIL
-        self.PHONE_NUMBER = PHONE_NUMBER
-
-        HandleCSV.all.append(self)
     @classmethod
     def read_entire_csv(cls):
         with open(cls.filename, "r") as foo:
             return foo.readlines()
 
-
     @classmethod
     def read_csv_line_by_line(cls):
         with open(cls.filename) as bar:
-            yield bar.readline()
+            yield bar.readlines()
 
     @classmethod
-    def instantiate_from_csv(cls):
-        with open('employees.csv', 'r') as f:
-            reader = csv.DictReader(f)
-            items = list(reader)
+    def read_csv_employees_details(cls):
+        salary = {}
+        with open(cls.filename, encoding="utf8") as bar:
+            csv_reader = csv.DictReader(bar)
+            for lines1 in csv_reader:
+                if int(lines1["SALARY"]) > 9000:
+                    first_name = lines1["FIRST_NAME"]
+                    last_name = lines1["LAST_NAME"]
+                    name = f"{first_name} {last_name}"
+                    email = lines1["EMAIL"]
+                    phone_number = lines1["PHONE_NUMBER"]
+                    salary.update({"name": name})
+                    salary.update({"email": email})
+                    salary.update({"Phone_Number": phone_number}, )
+                    print(salary)
 
-        for item in items:
-            HandleCSV(
-                first_name = str(item.get('FIRST_NAME')),
-                last_name = str(item.get('LAST_NAME')),
-                email = str(item.get('EMAIL'))
-            )
 
-    def _repr_(self):
-        return f"Item('{self.FIRST_NAME}', {self.LAST_NAME}, {self.EMAIL})"
+csvfile = HandleCSV()
 
+file = csvfile.read_entire_csv()
+print("entire file details \n ", file)
+print("#"*100)
 
-# TODO - ADD MORE SUCH METHODS HERE
-# TODO - UNDERSTAND USAGE OF `classmethod` HERE
+csvfile1 = csvfile.read_csv_line_by_line()
+print("line by line details")
 
-print(HandleCSV.all)
+for lines in csvfile1:
+    print(lines)
+
+print("###"*50,"\n")
+
+print("Salary is Greater than 9000 Employees: \n ",)
+csvfile.read_csv_employees_details()
