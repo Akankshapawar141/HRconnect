@@ -22,11 +22,6 @@ for emp in employees:
     for key, value in emp.items():
         if key == "DEPARTMENT_ID":
             value = int(value)
-            if (value > 30) and (value < 110):
+            if 30 < int(emp["DEPARTMENT_ID"]) <=110 and int(emp["SALARY"]) > 4200:
                 print(f"HIRE DATE :{emp['HIRE_DATE']} \nDEPT_ID :{emp['DEPARTMENT_ID']} \nNAME:{emp['FIRST_NAME']} "
-                      f"{emp['LAST_NAME']}\n")
-                # if key == "SALARY":
-                #     value = int(value)
-                #     if value > 4200:
-                #         dict_ = f"HIRE DATE :{emp['HIRE_DATE']} :\n {emp['FIRST_NAME']} {emp['LAST_NAME']}"
-                #         print(dict_)
+                      f"{emp['LAST_NAME']}\nSALARY :{emp['SALARY']}\n")
